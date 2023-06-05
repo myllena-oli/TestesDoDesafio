@@ -2,10 +2,7 @@ package SistemaVendas;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Venda {
     private Vendedor vendedor;
@@ -31,13 +28,16 @@ public class Venda {
     public Venda() {
 
     }
+
     public void listarVendas() {
         System.out.println("Lista de Vendas\n");
         //Venda venda = new Venda();
 
         for (Venda vendaAtual : getVendas()) {
 
-            System.out.println("Vendedor: " + getVendedor().getNome());
+            System.out.println("Vendedor responsável: " + getVendedor().getNome());
+            System.out.println("Cliente: " + getCliente().getNome());
+
             System.out.println("Vendedor: " + vendaAtual.getVendedor().getNome());
             System.out.println("Cliente: " + vendaAtual.getCliente().getNome());
             System.out.println("Produto: " + vendaAtual.getProduto().getNome());
@@ -48,52 +48,27 @@ public class Venda {
         }
     }
 
-    public void realizarVenda(Cliente cliente, List<Vendedor> vendedores) {
+    public void realizarVenda(Cliente cliente) {
         Scanner ler = new Scanner(System.in);
-        Vendedor vendedor1 = new Vendedor();
-        Produto produto1 = new Produto();
+        Random random = new Random();
+        Vendedor vendedorCompraAtual;
 
-        System.out.println("Realização de Venda\n");
+        System.out.println("--------------------------- Realização de Venda ---------------------------\n");
 
-        int escolhaVendedor;
-        while (true) {
-            System.out.println("Lista de Vendedores:\n");
+        System.out.println("Lista de Vendedores:\n");
+        vendedor.listarVendedores();
 
-            for (int i = 0; i < vendedores.size(); i++) {
-                System.out.println((i + 1) + ". " + vendedores.get(i).getNome());
+        vendedorCompraAtual = vendedor.getVendedores().get(random.nextInt(vendedor.getVendedores().size()));
+        System.out.println("O(a) funcionario(a) "+vendedorCompraAtual.getNome()+" está disponível e irá atender você! ");
 
-            }
-
-            System.out.print("\nDigite o número do vendedor desejado: ");
-            escolhaVendedor = ler.nextInt();
-            ler.nextLine(); // Limpa o buffer do scanner
-
-            if (escolhaVendedor < 1 || escolhaVendedor > vendedores.size()) {
-                System.out.println("Opção inválida.\nTente novamente");
-
-            } else {
-                break;
-            }
-        }
-
-        Vendedor vendedorCompraAtual = vendedores.get(escolhaVendedor - 1);
-
-//
-//        System.out.print("Digite o e-mail do vendedor: ");
-//        String emailVendedor = ler.nextLine();
-//        Vendedor vendedor = buscarVendedorPorEmail(emailVendedor);
-//        if (vendedor == null) {
-//            System.out.println("Vendedor não encontrado.\n");
-//            return;
-//        }
 
         while (true) {
             System.out.println("Produtos disponíveis:\n");
-            produto1.listarProdutosDisponiveis();
+            produto.listarProdutosDisponiveis();
 
             System.out.print("\nDigite o código do produto: ");
-            String codigoProduto = ler.nextLine();
-            Produto produtoEscolhido = produto1.buscarProdutoPorCodigo(codigoProduto);
+            int codigoProduto = ler.nextInt();
+            Produto produtoEscolhido = produto.buscarProdutoPorCodigo(codigoProduto);
             if (produtoEscolhido == null) {
                 System.out.println("Produto não encontrado.\nTente novamente.");
                 continue;
@@ -117,6 +92,7 @@ public class Venda {
             break;
         }
     }
+
     public String obterDiaAtual() {
 
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");

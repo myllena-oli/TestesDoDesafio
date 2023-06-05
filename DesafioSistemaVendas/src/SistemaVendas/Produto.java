@@ -4,15 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Produto {
-    private String codigo;
+    static int codigoGerado = 0;
+    private int codigo;
     private String nome;
     private double preco;
     private int quantidadeDisponivel;
     private List<Produto> produtos = new ArrayList<>();
 
 
-    public Produto(String codigo, String nome, double preco, int quantidadeDisponivel) {
-        this.codigo = codigo;
+    public Produto(String nome, double preco, int quantidadeDisponivel) {
+        codigoGerado++;
+        this.codigo = codigoGerado;
         this.nome = nome;
         this.preco = preco;
         this.quantidadeDisponivel = quantidadeDisponivel;
@@ -37,10 +39,10 @@ public class Produto {
             System.out.println("---------------------------");
         }
     }
-    public Produto buscarProdutoPorCodigo(String codigo) {
-        Produto produto = new Produto();
-        for (Produto buscarProduto : produto.getProdutos()) {
-            if (buscarProduto.getCodigo().equals(codigo)) {
+    public Produto buscarProdutoPorCodigo(int codigo) {
+//        Produto produto = new Produto();
+        for (Produto buscarProduto : getProdutos()) {
+            if (buscarProduto.getCodigo()==codigo) {
                 return buscarProduto;
             }
         }
@@ -48,7 +50,7 @@ public class Produto {
     }
 
 
-    public String getCodigo() {
+    public int getCodigo() {
         return codigo;
     }
     public String getNome() {

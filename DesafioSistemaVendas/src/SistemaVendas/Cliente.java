@@ -8,6 +8,7 @@ public class Cliente {
     private String cpf;
     private String senha;
     private Map<String, Cliente> cpfCliente = new HashMap<>();
+    private Map<String, Cliente> emailCliente = new HashMap<>();
     private List<Cliente> clientes = new ArrayList<>();
 
 
@@ -47,6 +48,11 @@ public class Cliente {
         while (true) {
             System.out.println("Digite o e-mail: ");
             email = ler.nextLine();
+
+            if (emailCliente.containsKey(email)) {
+                System.out.println("Email já cadastrado.\n");
+                return emailCliente.get(email);
+            }
 
             if (!email.contains("@")) {
                 System.out.println("Para o email ser válido, ele deve conter '@'!");
@@ -124,6 +130,10 @@ public class Cliente {
 
     // getters e setters
 
+
+    public Map<String, Cliente> getEmailCliente() {
+        return emailCliente;
+    }
 
     public Map<String, Cliente> getCpfCliente() {
         return cpfCliente;
