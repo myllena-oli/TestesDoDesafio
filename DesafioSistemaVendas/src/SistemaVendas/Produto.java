@@ -18,8 +18,6 @@ public class Produto {
         this.nome = nome;
         this.preco = preco;
         this.quantidadeDisponivel = quantidadeDisponivel;
-       // this.produtos = new ArrayList<>();
-
     }
     public Produto(){
 
@@ -40,7 +38,6 @@ public class Produto {
         }
     }
     public Produto buscarProdutoPorCodigo(int codigo) {
-//        Produto produto = new Produto();
         for (Produto buscarProduto : getProdutos()) {
             if (buscarProduto.getCodigo()==codigo) {
                 return buscarProduto;
@@ -73,7 +70,4 @@ public class Produto {
         return this.produtos;
     }
 
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
-    }
 }

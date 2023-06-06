@@ -12,7 +12,6 @@ public class Cliente {
     private List<Cliente> clientes = new ArrayList<>();
 
 
-
     public Cliente(String nome, String email, String cpf, String senha) {
         this.nome = nome;
         this.email = email;
@@ -23,8 +22,10 @@ public class Cliente {
 
 
     }
-    public Cliente(){
+
+    public Cliente() {
     }
+
 
     public void listarClientes() {
         System.out.println("Lista de Clientes\n");
@@ -39,7 +40,7 @@ public class Cliente {
 
     public Cliente cadastrarCliente() {
         Scanner ler = new Scanner(System.in);
-        System.out.println("Cadastro de Cliente\n");
+        System.out.println("----------Cadastro de Cliente----------\n");
 
         System.out.println("Digite o nome: ");
         String nome = ler.nextLine();
@@ -56,13 +57,12 @@ public class Cliente {
 
             if (!email.contains("@")) {
                 System.out.println("Para o email ser válido, ele deve conter '@'!");
-            }
-            else{
+            } else {
                 break;
             }
         }
 
-        System.out.print("Digite o CPF: ");
+        System.out.println("Digite o CPF: ");
         String cpf = ler.nextLine();
 
         if (cpfCliente.containsKey(cpf)) {
@@ -70,7 +70,7 @@ public class Cliente {
             return cpfCliente.get(cpf);
         }
 
-        System.out.print("Digite a senha: ");
+        System.out.println("Digite a senha: ");
         String senha = ler.nextLine();
 
 
@@ -90,42 +90,39 @@ public class Cliente {
         int tentativa = 0;
 
         System.out.println("É necessário logar para poder realizar compras!");
-        while (true) {
-            System.out.print("Digite o CPF do cliente: ");
-            String cpfParaLogin = ler.nextLine();
 
-            Map<String, Cliente> listaClientes = getCpfCliente();
+        System.out.print("Digite o CPF do cliente: ");
+        String cpfParaLogin = ler.nextLine();
 
-            if (!(listaClientes.containsKey(cpfParaLogin))) {
-                System.out.println("CPF não cadastrado.\n");
-                System.out.println("Redirecionando para o cadastro de clientes... ");
-                return cliente.cadastrarCliente();
+        Map<String, Cliente> listaClientes = getCpfCliente();
 
-            } else {
-                cliente = listaClientes.get(cpfParaLogin);
-            }
+        if (!(listaClientes.containsKey(cpfParaLogin))) {
+            System.out.println("CPF não cadastrado.\n");
+            System.out.println("Redirecionando para o cadastro de clientes... ");
+            return cliente.cadastrarCliente();
 
-            while (true) {
-                System.out.print("Digite a senha: ");
-                String senha = ler.nextLine();
-                tentativa++;
-
-                if (!cliente.getSenha().equals(senha)) {
-                    System.out.println("Senha incorreta.\n");
-                    if (tentativa > 3) {
-                        throw new LimiteDeTentativasException("Limite de tentativas atingido!");
-                    }
-                } else {
-                    System.out.println("Login efetuado! Bem vindo, cliente "+cliente.getNome());
-                    break;
-                }
-            }
-            break;
+        } else {
+            cliente = listaClientes.get(cpfParaLogin);
         }
+
+        while (true) {
+            System.out.print("Digite a senha: ");
+            String senha = ler.nextLine();
+            tentativa++;
+
+            if (!cliente.getSenha().equals(senha)) {
+                System.out.println("Senha incorreta.\n");
+                if (tentativa > 3) {
+                    throw new LimiteDeTentativasException("Limite de tentativas atingido!");
+                }
+            } else {
+                System.out.println("Login efetuado! Bem vindo, cliente " + cliente.getNome());
+                break;
+            }
+        }
+
         return cliente;
     }
-
-
 
 
     // getters e setters

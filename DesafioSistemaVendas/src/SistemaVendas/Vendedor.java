@@ -37,7 +37,7 @@ public class Vendedor {
         }
     }
 
-    public Vendedor cadastrarVendedor() {
+    public void cadastrarVendedor() {
         Scanner ler = new Scanner(System.in);
         System.out.println("Cadastro de Vendedores\n");
 
@@ -51,7 +51,7 @@ public class Vendedor {
 
             if (emailVendedor.containsKey(email)) {
                 System.out.println("Email já cadastrado.\n");
-                return emailVendedor.get(email);
+                return;
             }
 
             if (!email.contains("@")) {
@@ -67,7 +67,7 @@ public class Vendedor {
 
         if (cpfVendedor.containsKey(cpf)) {
             System.out.println("CPF já cadastrado.\n");
-            return cpfVendedor.get(cpf);
+            return;
         }
 
 
@@ -76,25 +76,11 @@ public class Vendedor {
         cpfVendedor.put(cpf, vendedor);
 
         System.out.println("\nVendedor cadastrado com sucesso!\n");
-
-        return vendedor;
     }
 
 
 
-    private Vendedor buscarVendedorPorEmail(String email) {
 
-        Vendedor vendedor = new Vendedor();
-
-        for (Vendedor buscarVendedor : vendedor.getVendedores()) {
-            System.out.println("Conferir se nesse for eu preciso colocar o vendedor. aqui em cima.");
-
-            if (buscarVendedor.getEmail().equals(email)) {
-                return buscarVendedor;
-            }
-        }
-        return null;
-    }
 
 
     // getters e setters

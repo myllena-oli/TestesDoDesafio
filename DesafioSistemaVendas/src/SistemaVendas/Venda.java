@@ -11,7 +11,7 @@ public class Venda {
     private int quantidade;
     private double valorTotal;
     private String dataRegistro;
-    private List<Venda> vendas = new ArrayList<>();
+    private List<Venda> vendas;
 
 
     public Venda(Vendedor vendedor, Cliente cliente, Produto produto, int quantidade, String dataRegistro) {
@@ -25,13 +25,8 @@ public class Venda {
 
     }
 
-    public Venda() {
-
-    }
-
     public void listarVendas() {
         System.out.println("Lista de Vendas\n");
-        //Venda venda = new Venda();
 
         for (Venda vendaAtual : getVendas()) {
 
@@ -79,11 +74,13 @@ public class Venda {
             ler.nextLine(); // Limpa o buffer do scanner
 
             if (quantidade > produtoEscolhido.getQuantidadeDisponivel()) {
-                System.out.println("Quantidade insuficiente do produto.\nTente novamente.");
+                System.out.println("Quantidade insuficiente do produto.\nTente escolher outro produto ou quantidade.");
                 continue;
             }
 
             produtoEscolhido.setQuantidadeDisponivel(produtoEscolhido.getQuantidadeDisponivel() - quantidade);
+
+            //System.out.println("Digite 1 para finalizar a compra ou 2 para comprar mais itens");
 
             Venda venda = new Venda(vendedorCompraAtual, cliente, produtoEscolhido, quantidade, obterDiaAtual());
             vendas.add(venda);
@@ -92,6 +89,45 @@ public class Venda {
             break;
         }
     }
+
+    public void pesquisarCompraCliente() {
+        Scanner ler = new Scanner(System.in);
+        System.out.println("Digite o cpf para realizar a busca: ");
+        String cpf = ler.nextLine();
+
+
+        for (Venda buscar : vendas) {
+            if (buscar.getCliente().getCpf().equals(cpf)) {
+                System.out.println("Vendedor: " + buscar.getVendedor().getNome());
+                System.out.println("Cliente: " + buscar.getCliente().getNome());
+                System.out.println("Produto: " + buscar.getProduto().getNome());
+                System.out.println("Quantidade: " + buscar.getQuantidade());
+                System.out.println("Valor Total: " + buscar.getValorTotal());
+                System.out.println("Data de Registro: " + buscar.getDataRegistro());
+                System.out.println("---------------------------");
+            }
+        }
+    }
+
+    public void pesquisarCompraVendedor() {
+        Scanner ler = new Scanner(System.in);
+        System.out.println("Digite o email para realizar a busca: ");
+        String email = ler.nextLine();
+
+
+        for (Venda buscar : vendas) {
+            if (buscar.getVendedor().getEmail().equals(email)) {
+                System.out.println("Vendedor: " + buscar.getVendedor().getNome());
+                System.out.println("Cliente: " + buscar.getCliente().getNome());
+                System.out.println("Produto: " + buscar.getProduto().getNome());
+                System.out.println("Quantidade: " + buscar.getQuantidade());
+                System.out.println("Valor Total: " + buscar.getValorTotal());
+                System.out.println("Data de Registro: " + buscar.getDataRegistro());
+                System.out.println("---------------------------");
+            }
+        }
+    }
+
 
     public String obterDiaAtual() {
 
