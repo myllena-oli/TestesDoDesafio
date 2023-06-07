@@ -40,29 +40,30 @@ public class IniciarLoja {
         produto.adicionarProduto(produto3);
 
         while (true) {
-            System.out.println("---------------------------");
-            System.out.println("Menu de Acesso:\n");
+            System.out.println("----------------------------------");
+            System.out.println("          Menu de Acesso:\n");
             System.out.println("1. Cadastrar Cliente");
             System.out.println("2. Cadastrar Vendedor");
             System.out.println("3. Listar Clientes");
             System.out.println("4. Listar Vendedores");
             System.out.println("5. Comprar produtos");
             System.out.println("6. Pesquisar compras de um cliente");
-
-            System.out.println("Implementar próxima função:");
             System.out.println("7. Pesquisar compras de um vendedor");
-
-
-
             System.out.println("8. Listar Vendas");
-
-
-
             System.out.println("0. Sair\n");
-            System.out.println("Escolha uma opção: ");
-
-            int opcao = ler.nextInt();
-            ler.nextLine(); // Limpa o buffer do scanner
+            int opcao;
+            while (true) {
+                try {
+                    System.out.println("Escolha uma opção: ");
+                    opcao = ler.nextInt();
+                } catch (InputMismatchException DigitoIncorreto) {
+                    System.out.println("InputMismatchException: Essa opção não é válida.");
+                    ler.nextLine();
+                    continue;
+                }
+                ler.nextLine(); // Limpa o buffer do scanner
+                break;
+            }
 
 
             switch (opcao) {
@@ -92,17 +93,19 @@ public class IniciarLoja {
                     break;
 
                 case 6:
-                    venda.pesquisarCompraCliente();
+                    try {
+                        venda.pesquisarCompraCliente();
+                    } catch (NullPointerException Excecao) {
+                        System.out.println(Excecao.getMessage());
+                    }
                     break;
                 case 7:
-                    venda.pesquisarCompraVendedor();
+                    try {
+                        venda.pesquisarCompraVendedor();
+                    } catch (NullPointerException Excecao) {
+                        System.out.println(Excecao.getMessage());
+                    }
                     break;
-
-
-
-
-
-
                 case 8:
                     venda.listarVendas();
                     break;
@@ -115,5 +118,4 @@ public class IniciarLoja {
             }
         }
     }
-
 }

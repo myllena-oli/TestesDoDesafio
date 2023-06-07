@@ -11,7 +11,6 @@ public class Vendedor {
     private Map<String, Vendedor> emailVendedor = new HashMap<>();
 
 
-
     public Vendedor(String nome, String email, String cpf) {
         this.nome = nome;
         this.email = email;
@@ -27,14 +26,15 @@ public class Vendedor {
     }
 
     public void listarVendedores() {
-        System.out.println("Lista de Vendedores\n");
+        System.out.println("\nLista de Vendedores");
 
         for (Vendedor vendedor : getVendedores()) {
+            System.out.println("---------------------------");
             System.out.println("Nome: " + vendedor.getNome());
             System.out.println("Email: " + vendedor.getEmail());
             System.out.println("CPF: " + vendedor.getCpf());
-            System.out.println("---------------------------");
         }
+        System.out.println("----------------------------------");
     }
 
     public void cadastrarVendedor() {
@@ -56,8 +56,7 @@ public class Vendedor {
 
             if (!email.contains("@")) {
                 System.out.println("Para o email ser válido, ele deve conter '@'!");
-            }
-            else{
+            } else {
                 break;
             }
         }
@@ -70,21 +69,16 @@ public class Vendedor {
             return;
         }
 
-
         Vendedor vendedor = new Vendedor(nome, email, cpf);
         vendedores.add(vendedor);
         cpfVendedor.put(cpf, vendedor);
+        emailVendedor.put(email, vendedor);
 
         System.out.println("\nVendedor cadastrado com sucesso!\n");
     }
 
 
-
-
-
-
     // getters e setters
-
 
     public String getNome() {
         return nome;

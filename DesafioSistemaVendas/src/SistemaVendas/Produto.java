@@ -27,7 +27,9 @@ public class Produto {
     }
 
     public void listarProdutosDisponiveis() {
-        System.out.println("Lista de Produtos Disponíveis\n");
+        System.out.println("\n----------------------------------");
+
+        System.out.println("Lista de Produtos Disponíveis:\n");
 
         for (Produto produto : getProdutos()) {
             System.out.println("Código: " + produto.getCodigo());

@@ -11,7 +11,6 @@ public class Cliente {
     private Map<String, Cliente> emailCliente = new HashMap<>();
     private List<Cliente> clientes = new ArrayList<>();
 
-
     public Cliente(String nome, String email, String cpf, String senha) {
         this.nome = nome;
         this.email = email;
@@ -19,8 +18,6 @@ public class Cliente {
         this.senha = senha;
         this.cpfCliente = new HashMap<>();
         this.clientes = new ArrayList<>();
-
-
     }
 
     public Cliente() {
@@ -28,20 +25,20 @@ public class Cliente {
 
 
     public void listarClientes() {
-        System.out.println("Lista de Clientes\n");
+        System.out.println("\nLista de Clientes:");
 
         for (Cliente cliente : getClientes()) {
+            System.out.println("---------------------------");
             System.out.println("Nome: " + cliente.getNome());
             System.out.println("Email: " + cliente.getEmail());
             System.out.println("CPF: " + cliente.getCpf());
-            System.out.println("---------------------------");
         }
+        System.out.println("----------------------------------");
     }
 
     public Cliente cadastrarCliente() {
         Scanner ler = new Scanner(System.in);
         System.out.println("----------Cadastro de Cliente----------\n");
-
         System.out.println("Digite o nome: ");
         String nome = ler.nextLine();
         String email;
@@ -49,12 +46,10 @@ public class Cliente {
         while (true) {
             System.out.println("Digite o e-mail: ");
             email = ler.nextLine();
-
             if (emailCliente.containsKey(email)) {
                 System.out.println("Email já cadastrado.\n");
                 return emailCliente.get(email);
             }
-
             if (!email.contains("@")) {
                 System.out.println("Para o email ser válido, ele deve conter '@'!");
             } else {
@@ -73,16 +68,15 @@ public class Cliente {
         System.out.println("Digite a senha: ");
         String senha = ler.nextLine();
 
-
         Cliente cliente = new Cliente(nome, email, cpf, senha);
         clientes.add(cliente);
         cpfCliente.put(cpf, cliente);
+        emailCliente.put(email, cliente);
 
         System.out.println("\nCliente cadastrado com sucesso!\n");
 
         return cliente;
     }
-
 
     public Cliente login() throws LimiteDeTentativasException {
         Scanner ler = new Scanner(System.in);
