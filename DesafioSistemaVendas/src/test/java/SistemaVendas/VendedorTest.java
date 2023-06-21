@@ -21,12 +21,12 @@ class VendedorTest {
         vendedores = new ArrayList<>();
         cpfVendedor = new HashMap<>();
         emailVendedor = new HashMap<>();
-        vendedor = new Vendedor("Myllena", "myllena@email.com", "123456789");
+        vendedor = new Vendedor("Myllena", "myllena@email.com", "123456789","senha123");
     }
 
     @Test
     public void deveAdicionarUmVendedor() {
-        Vendedor novoVendedor = new Vendedor("Ana", "ana@email.com", "987654321");
+        Vendedor novoVendedor = new Vendedor("Ana", "ana@email.com", "987654321","senha123");
         vendedor.adicionarVendedor(novoVendedor);
         List<Vendedor> vendedoresEsperados = new ArrayList<>();
         vendedoresEsperados.add(novoVendedor);

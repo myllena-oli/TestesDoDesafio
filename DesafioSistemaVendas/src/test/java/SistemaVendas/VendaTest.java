@@ -16,7 +16,7 @@ class VendaTest {
 
     @BeforeEach
     public void setUp() {
-        vendedor = new Vendedor("Myllena", "myllena@email.com","11111111111");
+        vendedor = new Vendedor("Myllena", "myllena@email.com","11111111111","senha123");
         cliente = new Cliente("My", "123456789","00000000000","senha123");
         venda = new Venda(vendedor, cliente, null, "19/06/2023");
     }

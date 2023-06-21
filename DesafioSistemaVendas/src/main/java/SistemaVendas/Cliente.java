@@ -1,5 +1,7 @@
 package SistemaVendas;
 
+import org.springframework.security.crypto.bcrypt.BCrypt;
+
 import java.util.*;
 
 public class Cliente {
@@ -67,8 +69,9 @@ public class Cliente {
 
         System.out.println("Digite a senha: ");
         String senha = ler.nextLine();
+        String hashSenha = BCrypt.hashpw(senha, BCrypt.gensalt());
 
-        Cliente cliente = new Cliente(nome, email, cpf, senha);
+        Cliente cliente = new Cliente(nome, email, cpf, hashSenha);
         clientes.add(cliente);
         cpfCliente.put(cpf, cliente);
         emailCliente.put(email, cliente);
@@ -104,9 +107,9 @@ public class Cliente {
             String senha = ler.nextLine();
             tentativa++;
 
-            if (!cliente.getSenha().equals(senha)) {
+            if(!BCrypt.checkpw(senha,cliente.getSenha())){
                 System.out.println("Senha incorreta.\n");
-                if (tentativa > 3) {
+                if (tentativa >= 3) {
                     throw new LimiteDeTentativasException("Limite de tentativas atingido!");
                 }
             } else {
